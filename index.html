@@ -55,7 +55,6 @@
             min-height: 100vh;
         }
 
-        /* ── Canvas Starfield Background ── */
         #starfield-canvas {
             position: fixed;
             top: 0;
@@ -67,7 +66,6 @@
             opacity: 0.85;
         }
 
-        /* ── Grid Overlay ── */
         .grid-overlay {
             position: fixed;
             top: 0;
@@ -85,7 +83,6 @@
             -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 30%, transparent 70%);
         }
 
-        /* ── Constellation SVG Decor ── */
         .constellation-decor {
             position: fixed;
             pointer-events: none;
@@ -105,7 +102,6 @@
             opacity: 0.05;
         }
 
-        /* ── Glassmorphic Navigation ── */
         .nav-glass {
             position: fixed;
             top: 20px;
@@ -158,7 +154,6 @@
             box-shadow: 0 0 25px rgba(180, 77, 255, 0.3);
         }
 
-        /* ── Main Content Wrapper ── */
         .main-wrapper {
             position: relative;
             z-index: 2;
@@ -167,7 +162,6 @@
             padding: 20px 28px 60px;
         }
 
-        /* ── Section Spacing ── */
         section {
             margin-bottom: 90px;
             scroll-margin-top: 120px;
@@ -198,38 +192,63 @@
             line-height: 1.5;
         }
 
-        /* ── Hero Section ── */
+        /* ── Refined Hero Section ── */
         .hero-section {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            min-height: 70vh;
+            padding: 30px 0 20px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1 1 500px;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-visual {
+            flex: 0 0 260px;
+            display: flex;
             justify-content: center;
-            min-height: 85vh;
-            padding-top: 40px;
+            align-items: center;
             position: relative;
         }
-        .hero-glow {
-            position: absolute;
-            top: 15%;
-            left: -5%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(160, 60, 240, 0.2) 0%, transparent 70%);
+        .hero-avatar-placeholder {
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
+            background: linear-gradient(145deg, rgba(180, 77, 255, 0.15) 0%, rgba(94, 234, 219, 0.08) 100%);
+            border: 2px solid rgba(200, 180, 240, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(220, 200, 250, 0.08) inset;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-avatar-placeholder span {
+            font-size: 4.5rem;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 12px rgba(180, 140, 220, 0.4));
+        }
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(160, 60, 240, 0.18) 0%, transparent 70%);
+            z-index: 0;
             animation: heroPulse 4s ease-in-out infinite;
         }
         @keyframes heroPulse {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.55;
-            }
-            50% {
-                transform: scale(1.15);
-                opacity: 0.85;
-            }
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.12); opacity: 0.9; }
         }
         .hero-badge {
             display: inline-flex;
@@ -238,69 +257,63 @@
             background: rgba(180, 140, 220, 0.12);
             border: 1px solid rgba(200, 170, 230, 0.25);
             border-radius: 50px;
-            padding: 7px 16px;
-            font-size: 0.85rem;
+            padding: 6px 15px;
+            font-size: 0.8rem;
             font-weight: 500;
             color: var(--accent-lavender);
-            margin-bottom: 24px;
+            margin-bottom: 18px;
             letter-spacing: 0.02em;
         }
         .hero-badge .dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             background: var(--accent-cyan);
             animation: dotBlink 2s ease-in-out infinite;
         }
         @keyframes dotBlink {
-            0%,
-            100% {
-                opacity: 0.4;
-                box-shadow: 0 0 6px var(--accent-cyan-dim);
-            }
-            50% {
-                opacity: 1;
-                box-shadow: 0 0 16px var(--accent-cyan);
-            }
+            0%, 100% { opacity: 0.4; box-shadow: 0 0 6px var(--accent-cyan-dim); }
+            50% { opacity: 1; box-shadow: 0 0 16px var(--accent-cyan); }
         }
         .hero-headline {
-            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
             font-weight: 900;
             letter-spacing: -0.03em;
-            line-height: 1.08;
-            margin-bottom: 18px;
+            line-height: 1.12;
+            margin-bottom: 14px;
             color: #fff;
         }
         .hero-headline .highlight {
-            background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-lavender) 50%, var(--accent-cyan) 100%);
+            background: linear-gradient(135deg, rgba(160, 60, 240, 0.7) 0%, rgba(120, 40, 200, 0.7) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .hero-bio {
-            font-size: 1.2rem;
+            font-size: 0.98rem;
             color: var(--text-secondary);
             max-width: 520px;
             line-height: 1.6;
-            margin-bottom: 32px;
+            margin-bottom: 26px;
         }
         .hero-cta-group {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 13px 26px;
+            padding: 12px 24px;
             background: linear-gradient(135deg, rgba(160, 60, 240, 0.7) 0%, rgba(120, 40, 200, 0.7) 100%);
             border: 1px solid rgba(200, 160, 240, 0.35);
             border-radius: 50px;
             color: #fff;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-decoration: none;
             letter-spacing: 0.01em;
             cursor: pointer;
@@ -318,13 +331,13 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 13px 26px;
+            padding: 12px 24px;
             background: transparent;
             border: 1px solid rgba(200, 170, 230, 0.3);
             border-radius: 50px;
             color: var(--text-primary);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-decoration: none;
             cursor: pointer;
             transition: all var(--transition-smooth);
@@ -337,7 +350,6 @@
             transform: translateY(-2px);
         }
 
-        /* ── Skills Section ── */
         .skills-category {
             margin-bottom: 28px;
         }
@@ -384,7 +396,6 @@
             opacity: 0.85;
         }
 
-        /* ── Certifications Section ── */
         .certs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -431,32 +442,49 @@
             overflow: hidden;
             flex-shrink: 0;
         }
-        .cert-thumb-inner {
-            text-align: center;
-            padding: 10px;
-            position: relative;
-            z-index: 1;
+        .cert-thumb-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            z-index: 2;
+            transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
         }
-        .cert-thumb-seal {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #c988ff 0%, #7b3fd4 100%);
-            margin: 0 auto 8px;
+        .cert-card:hover .cert-thumb-img {
+            transform: scale(1.06);
+        }
+        .cert-thumb-fallback {
+            position: absolute;
+            inset: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            color: #fff;
-            font-weight: 700;
-            box-shadow: 0 0 20px rgba(180, 77, 255, 0.5);
+            gap: 6px;
+            z-index: 1;
+            pointer-events: none;
         }
-        .cert-thumb-line {
-            width: 60%;
-            height: 2px;
-            background: rgba(200, 170, 230, 0.4);
-            margin: 6px auto;
-            border-radius: 2px;
+        .cert-thumb-fallback .fallback-icon {
+            font-size: 1.8rem;
+            opacity: 0.55;
+            filter: grayscale(0.3);
+        }
+        .cert-thumb-fallback .fallback-text {
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        .cert-thumb-fallback .fallback-code {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--accent-cyan-dim);
+            letter-spacing: 0.04em;
+            opacity: 0.6;
         }
         .cert-card .cert-title {
             font-weight: 700;
@@ -483,7 +511,6 @@
             opacity: 1;
         }
 
-        /* ── Lightbox Modal ── */
         .lightbox-overlay {
             position: fixed;
             top: 0;
@@ -512,7 +539,7 @@
             border: 1px solid var(--border-glass-bright);
             border-radius: var(--radius-xl);
             padding: 30px 24px 24px;
-            max-width: 620px;
+            max-width: 680px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
@@ -549,64 +576,88 @@
             transform: rotate(90deg);
             border-color: rgba(255, 255, 255, 0.5);
         }
-        .lightbox-cert-preview {
+
+        .lightbox-cert-image-wrapper {
             width: 100%;
             aspect-ratio: 1.55 / 1;
-            background: linear-gradient(160deg, #fdfcf8 0%, #f5f0e8 30%, #fefdf9 60%, #f8f3ea 100%);
-            border-radius: 8px;
-            border: 3px solid #d4c8b8;
+            background: #1a1635;
+            border-radius: 12px;
+            border: 2px solid rgba(200, 180, 240, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(220, 200, 250, 0.06);
+            transition: border-color var(--transition-smooth);
+        }
+        .lightbox-cert-image-wrapper:hover {
+            border-color: rgba(220, 200, 250, 0.45);
+        }
+        .lightbox-cert-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 2;
+            border-radius: 10px;
+        }
+        .lightbox-cert-image-fallback {
+            position: absolute;
+            inset: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8%;
-            position: relative;
-            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.5), inset 0 0 0 6px #fdfcf8, inset 0 0 0 8px #c8b898;
-            margin-bottom: 16px;
+            gap: 8px;
+            z-index: 1;
+            pointer-events: none;
         }
-        .lightbox-cert-seal {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #8b3fd4 0%, #5a2099 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #f5e8ff;
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            box-shadow: 0 0 30px rgba(120, 40, 180, 0.6);
-            border: 3px solid #c8a8e0;
+        .lightbox-cert-image-fallback .lightbox-fallback-icon {
+            font-size: 3rem;
+            opacity: 0.45;
         }
-        .lightbox-cert-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #2d1a4a;
-            letter-spacing: 0.02em;
-            font-family: 'Inter', serif;
-            margin: 4px 0;
-        }
-        .lightbox-cert-name {
+        .lightbox-cert-image-fallback .lightbox-fallback-text {
             font-size: 1rem;
-            color: #4a3070;
             font-weight: 600;
-            border-bottom: 1px solid #c8b8a0;
-            padding-bottom: 8px;
-            margin-bottom: 6px;
-            display: inline-block;
-        }
-        .lightbox-cert-org {
-            font-size: 0.85rem;
-            color: #6b5a80;
-            font-weight: 500;
+            color: var(--text-muted);
             letter-spacing: 0.03em;
-            text-transform: uppercase;
         }
-        .lightbox-cert-date {
-            font-size: 0.7rem;
-            color: #8a7a9a;
-            margin-top: 4px;
+        .lightbox-cert-image-fallback .lightbox-fallback-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            letter-spacing: 0.02em;
+        }
+        .lightbox-cert-details {
+            padding: 4px 0;
+        }
+        .lightbox-cert-details .detail-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+        }
+        .lightbox-cert-details .detail-org {
+            font-size: 0.85rem;
+            color: var(--accent-lavender);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        .lightbox-cert-details .detail-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+            letter-spacing: 0.03em;
+        }
+        .lightbox-cert-details .detail-name {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         /* ── Projects Section ── */
@@ -663,12 +714,28 @@
             overflow: hidden;
             flex-shrink: 0;
         }
+        .project-mockup-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            z-index: 2;
+            transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
+        }
+        .project-card:hover .project-mockup-img {
+            transform: scale(1.05);
+        }
         .mockup-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
             opacity: 0.7;
+            position: relative;
+            z-index: 1;
+            pointer-events: none;
         }
         .mockup-icon {
             width: 44px;
@@ -769,6 +836,37 @@
 
         /* ── Responsive ── */
         @media (max-width: 900px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                min-height: auto;
+                gap: 30px;
+            }
+            .hero-content {
+                max-width: 100%;
+                align-items: center;
+            }
+            .hero-bio {
+                max-width: 100%;
+            }
+            .hero-cta-group {
+                justify-content: center;
+            }
+            .hero-visual {
+                flex: 0 0 auto;
+                margin-top: 10px;
+            }
+            .hero-avatar-placeholder {
+                width: 160px;
+                height: 160px;
+            }
+            .hero-avatar-placeholder span {
+                font-size: 3.2rem;
+            }
+            .hero-visual::before {
+                width: 200px;
+                height: 200px;
+            }
             .projects-bento {
                 grid-template-columns: repeat(6, 1fr);
                 gap: 14px;
@@ -799,8 +897,29 @@
                 grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
                 gap: 14px;
             }
+            .lightbox-content {
+                max-width: 90%;
+                padding: 22px 16px 18px;
+            }
+            .lightbox-cert-image-wrapper {
+                aspect-ratio: 1.5 / 1;
+            }
         }
         @media (max-width: 550px) {
+            .hero-section {
+                gap: 20px;
+            }
+            .hero-avatar-placeholder {
+                width: 130px;
+                height: 130px;
+            }
+            .hero-avatar-placeholder span {
+                font-size: 2.6rem;
+            }
+            .hero-visual::before {
+                width: 160px;
+                height: 160px;
+            }
             .projects-bento {
                 grid-template-columns: 1fr;
                 grid-auto-rows: auto;
@@ -834,7 +953,7 @@
                 font-size: 1.8rem;
             }
             .hero-bio {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             .certs-grid {
                 grid-template-columns: 1fr 1fr;
@@ -847,18 +966,23 @@
             .cert-thumb {
                 height: 80px;
             }
+            .lightbox-cert-image-wrapper {
+                aspect-ratio: 1.45 / 1;
+            }
+            .lightbox-cert-image-fallback .lightbox-fallback-icon {
+                font-size: 2.2rem;
+            }
+            .lightbox-cert-image-fallback .lightbox-fallback-text {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Starfield Canvas -->
     <canvas id="starfield-canvas"></canvas>
-
-    <!-- Grid Overlay -->
     <div class="grid-overlay"></div>
 
-    <!-- Constellation Decor -->
     <svg class="constellation-decor" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="80" r="3" fill="#c988ff" opacity="0.7"/>
         <circle cx="180" cy="40" r="2.5" fill="#c988ff" opacity="0.6"/>
@@ -885,7 +1009,6 @@
         <line x1="200" y1="250" x2="80" y2="320" stroke="#5eeadb" stroke-width="0.5" opacity="0.3"/>
     </svg>
 
-    <!-- Glassmorphic Navigation -->
     <nav class="nav-glass" aria-label="Main navigation">
         <a href="#hero">Home</a>
         <a href="#skills">Skills</a>
@@ -894,271 +1017,170 @@
         <a href="#contact" class="nav-cta">Contact</a>
     </nav>
 
-    <!-- Main Content -->
     <div class="main-wrapper">
 
-        <!-- Hero Section -->
         <section id="hero" class="hero-section reveal">
-            <div class="hero-glow"></div>
-            <div class="hero-badge">
-                <span class="dot"></span> Available for Internship Opportunities
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span> IT Student & Developer
+                </div>
+                <h1 class="hero-headline">
+                    Hi, I'm <span class="highlight">Charl Dominic Ursabia</span>
+                </h1>
+                <p class="hero-bio">
+                    I am a BSIT student with a solid foundation in full-stack web and mobile development, and a growing passion for securing the systems I build. My toolkit spans Laravel, ASP.NET, and Flutter, while I actively expand my knowledge into networking and cybersecurity.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#projects" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+                        View My Work
+                    </a>
+                    <a href="https://github.com/charl555" target="_blank" rel="noopener" class="btn-secondary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
             </div>
-            <h1 class="hero-headline">
-                Hi, I'm <span class="highlight">Charl Dominic Ursabia</span><br>IT Intern &amp; Developer
-            </h1>
-            <p class="hero-bio">
-                A passionate IT student 
-            </p>
-            <div class="hero-cta-group">
-                <a href="#projects" class="btn-primary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
-                    View My Work
-                </a>
-                <a href="https://github.com" target="_blank" rel="noopener" class="btn-secondary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                    GitHub
-                </a>
+            <div class="hero-visual">
+                <div class="hero-avatar-placeholder">
+                    <span>👨‍💻</span>
+                </div>
             </div>
         </section>
 
-        <!-- Technical Skills Section -->
         <section id="skills" class="reveal">
             <span class="section-label">Technical Toolkit</span>
             <h2 class="section-title">Skills &amp; Expertise</h2>
-            <p class="section-subtitle">A curated stack of languages, frameworks, and tools I use daily to build, secure, and deploy software.</p>
-
             <div class="skills-category">
-                <h3 class="skills-category-title">💻 Languages</h3>
+                <h3 class="skills-category-title">Languages</h3>
                 <div class="skills-pills">
-                    <span class="skill-pill"><span class="skill-icon">🐍</span> Python</span>
-                    <span class="skill-pill"><span class="skill-icon">☕</span> Java</span>
-                    <span class="skill-pill"><span class="skill-icon">⚡</span> JavaScript</span>
-                    <span class="skill-pill"><span class="skill-icon">🔷</span> TypeScript</span>
-                    <span class="skill-pill"><span class="skill-icon">🐘</span> SQL</span>
-                    <span class="skill-pill"><span class="skill-icon">🐚</span> Bash</span>
-                    <span class="skill-pill"><span class="skill-icon">🌐</span> HTML/CSS</span>
+                    <span class="skill-pill">PHP</span>
+                    <span class="skill-pill">C#</span>
+                    <span class="skill-pill">Java</span>
+                    <span class="skill-pill">Python</span>
+                    <span class="skill-pill">JavaScript</span>
+                    <span class="skill-pill">HTML5</span>
+                    <span class="skill-pill">CSS3</span>
                 </div>
             </div>
-
             <div class="skills-category">
-                <h3 class="skills-category-title">⚛️ Frameworks &amp; Libraries</h3>
+                <h3 class="skills-category-title">Frameworks &amp; Libraries</h3>
                 <div class="skills-pills">
-                    <span class="skill-pill">React</span>
-                    <span class="skill-pill">Node.js</span>
-                    <span class="skill-pill">Express</span>
+                    <span class="skill-pill">Laravel</span>
+                    <span class="skill-pill">Filament PHP</span>
+                    <span class="skill-pill">ASP.NET</span>
+                    <span class="skill-pill">Flutter</span>
                     <span class="skill-pill">Tailwind CSS</span>
-                    <span class="skill-pill">Flask</span>
-                    <span class="skill-pill">Prisma ORM</span>
                 </div>
             </div>
-
             <div class="skills-category">
-                <h3 class="skills-category-title">🛠️ Developer Tools &amp; Platforms</h3>
+                <h3 class="skills-category-title">Developer Tools</h3>
                 <div class="skills-pills">
-                    <span class="skill-pill">Git &amp; GitHub</span>
-                    <span class="skill-pill">Docker</span>
-                    <span class="skill-pill">AWS (EC2, S3)</span>
-                    <span class="skill-pill">Linux Admin</span>
                     <span class="skill-pill">VS Code</span>
+                    <span class="skill-pill">Visual Studio 2022</span>
+                    <span class="skill-pill">Cisco Packet Tracer</span>
+                    <span class="skill-pill">Android Studio</span>
                     <span class="skill-pill">Figma</span>
-                    <span class="skill-pill">Postman</span>
-                    <span class="skill-pill">CI/CD Pipelines</span>
                 </div>
             </div>
         </section>
 
-        <!-- Certifications Section -->
         <section id="certifications" class="reveal">
             <span class="section-label">Credentials</span>
             <h2 class="section-title">Certifications</h2>
-            <p class="section-subtitle">Industry-recognized certifications validating my expertise. Click any card to view the full certificate.</p>
             <div class="certs-grid">
-                <!-- Cert 1: AWS -->
                 <div class="cert-card" data-cert="aws" onclick="openLightbox('aws')">
                     <div class="cert-thumb">
-                        <div class="cert-thumb-inner">
-                            <div class="cert-thumb-seal">☁️</div>
-                            <div class="cert-thumb-line"></div>
-                            <div style="font-size:0.7rem;color:#bfb5d6;margin-top:4px;">CLF-C02</div>
-                        </div>
+                        <img src="images/certificates/Cert-networksecurity.jpg" alt="Network Security Certificate" class="cert-thumb-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="cert-thumb-fallback"><span class="fallback-icon">📜</span><span class="fallback-text">Certificate</span><span class="fallback-code">CLF-C02</span></div>
                     </div>
-                    <div class="cert-title">AWS Certified Cloud Practitioner</div>
-                    <div class="cert-org">Amazon Web Services</div>
-                    <div class="view-hint">Click to view →</div>
+                    <div class="cert-title">Network Security</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
                 </div>
-
-                <!-- Cert 2: CompTIA -->
                 <div class="cert-card" data-cert="comptia" onclick="openLightbox('comptia')">
                     <div class="cert-thumb">
-                        <div class="cert-thumb-inner">
-                            <div class="cert-thumb-seal">🛡️</div>
-                            <div class="cert-thumb-line"></div>
-                            <div style="font-size:0.7rem;color:#bfb5d6;margin-top:4px;">SY0-701</div>
-                        </div>
+                        <img src="images/certificates/Cert-networking.jpg" alt="Networking Certificate" class="cert-thumb-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="cert-thumb-fallback"><span class="fallback-icon">🛡️</span><span class="fallback-text">Certificate</span><span class="fallback-code">SY0-701</span></div>
                     </div>
-                    <div class="cert-title">CompTIA Security+</div>
-                    <div class="cert-org">CompTIA</div>
-                    <div class="view-hint">Click to view →</div>
+                    <div class="cert-title">Networking</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
                 </div>
-
-                <!-- Cert 3: Google IT -->
                 <div class="cert-card" data-cert="google" onclick="openLightbox('google')">
                     <div class="cert-thumb">
-                        <div class="cert-thumb-inner">
-                            <div class="cert-thumb-seal">🔧</div>
-                            <div class="cert-thumb-line"></div>
-                            <div style="font-size:0.7rem;color:#bfb5d6;margin-top:4px;">IT Support</div>
-                        </div>
+                        <img src="images/certificates/Cert-htmlcss.jpg" alt="HTML & CSS Certificate" class="cert-thumb-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="cert-thumb-fallback"><span class="fallback-icon">🔧</span><span class="fallback-text">Certificate</span><span class="fallback-code">IT Support</span></div>
                     </div>
-                    <div class="cert-title">Google IT Support Professional</div>
-                    <div class="cert-org">Google / Coursera</div>
-                    <div class="view-hint">Click to view →</div>
+                    <div class="cert-title">HTML & CSS</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
                 </div>
-
-                <!-- Cert 4: Cisco -->
                 <div class="cert-card" data-cert="cisco" onclick="openLightbox('cisco')">
                     <div class="cert-thumb">
-                        <div class="cert-thumb-inner">
-                            <div class="cert-thumb-seal">🌐</div>
-                            <div class="cert-thumb-line"></div>
-                            <div style="font-size:0.7rem;color:#bfb5d6;margin-top:4px;">CCNA</div>
-                        </div>
+                        <img src="images/certificates/Cert-java.jpg" alt="Java Certificate" class="cert-thumb-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="cert-thumb-fallback"><span class="fallback-icon">🌐</span><span class="fallback-text">Certificate</span><span class="fallback-code">CCNA</span></div>
                     </div>
-                    <div class="cert-title">Cisco CCNA</div>
-                    <div class="cert-org">Cisco Systems</div>
-                    <div class="view-hint">Click to view →</div>
+                    <div class="cert-title">Java</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects" class="reveal">
             <span class="section-label">Portfolio</span>
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Real-world projects built during my internship and academic journey — each solving a meaningful problem.</p>
+            <h2 class="section-title">Projects</h2>
             <div class="projects-bento">
-                <!-- Project 1: CampusConnect -->
                 <div class="project-card span-7">
                     <div class="project-mockup">
-                        <div class="mockup-content">
-                            <div class="mockup-icon">🏫</div>
-                            <div class="mockup-lines">
-                                <span style="width:120px;"></span>
-                                <span style="width:90px;"></span>
-                                <span style="width:60px;"></span>
-                            </div>
-                        </div>
+                        <img src="images/projects/dressupdavao.png" alt="dressupdavao screenshot" class="project-mockup-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="mockup-content"><div class="mockup-icon">🏫</div><div class="mockup-lines"><span style="width:120px;"></span><span style="width:90px;"></span><span style="width:60px;"></span></div></div>
                     </div>
-                    <div class="project-title">CampusConnect</div>
-                    <div class="project-desc">A full-stack social platform for university students to collaborate on projects, share resources, and form study groups. Built with React, Node.js, and PostgreSQL.</div>
-                    <div class="project-tags">
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">Node.js</span>
-                        <span class="project-tag">PostgreSQL</span>
-                        <span class="project-tag">WebSockets</span>
-                    </div>
-                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        View on GitHub
-                    </a>
+                    <div class="project-title">DressUp Davao</div>
+                    <div class="project-desc">A Multi-Vendor Gown and Suit rental platform with 3D Model Visualization</div>
+                    <div class="project-tags"><span class="project-tag">Laravel</span><span class="project-tag">Filament PHP</span><span class="project-tag">MySQL</span><span class="project-tag">Apline.js</span></div>
+                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> View on GitHub</a>
                 </div>
-
-                <!-- Project 2: DevTrack -->
                 <div class="project-card span-5">
                     <div class="project-mockup">
-                        <div class="mockup-content">
-                            <div class="mockup-icon">📊</div>
-                            <div class="mockup-lines">
-                                <span style="width:80px;"></span>
-                                <span style="width:100px;"></span>
-                                <span style="width:50px;"></span>
-                            </div>
-                        </div>
+                        <img src="images/projects/devtrack.png" alt="DevTrack project screenshot" class="project-mockup-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="mockup-content"><div class="mockup-icon">📊</div><div class="mockup-lines"><span style="width:80px;"></span><span style="width:100px;"></span><span style="width:50px;"></span></div></div>
                     </div>
                     <div class="project-title">DevTrack</div>
                     <div class="project-desc">A developer productivity dashboard that aggregates GitHub activity, CI/CD statuses, and sprint metrics into one clean interface.</div>
-                    <div class="project-tags">
-                        <span class="project-tag">TypeScript</span>
-                        <span class="project-tag">Next.js</span>
-                        <span class="project-tag">REST APIs</span>
-                    </div>
-                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        View on GitHub
-                    </a>
+                    <div class="project-tags"><span class="project-tag">TypeScript</span><span class="project-tag">Next.js</span><span class="project-tag">REST APIs</span></div>
+                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> View on GitHub</a>
                 </div>
-
-                <!-- Project 3: SecureVault -->
                 <div class="project-card span-6">
                     <div class="project-mockup">
-                        <div class="mockup-content">
-                            <div class="mockup-icon">🔐</div>
-                            <div class="mockup-lines">
-                                <span style="width:100px;"></span>
-                                <span style="width:70px;"></span>
-                                <span style="width:85px;"></span>
-                            </div>
-                        </div>
+                        <img src="images/projects/securevault.png" alt="SecureVault project screenshot" class="project-mockup-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="mockup-content"><div class="mockup-icon">🔐</div><div class="mockup-lines"><span style="width:100px;"></span><span style="width:70px;"></span><span style="width:85px;"></span></div></div>
                     </div>
                     <div class="project-title">SecureVault</div>
                     <div class="project-desc">A zero-knowledge password manager with AES-256 encryption, built with a focus on security best practices and clean UX.</div>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">Flask</span>
-                        <span class="project-tag">Cryptography</span>
-                        <span class="project-tag">SQLite</span>
-                    </div>
-                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        View on GitHub
-                    </a>
+                    <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">Cryptography</span><span class="project-tag">SQLite</span></div>
+                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> View on GitHub</a>
                 </div>
-
-                <!-- Project 4: CloudSync -->
                 <div class="project-card span-6">
                     <div class="project-mockup">
-                        <div class="mockup-content">
-                            <div class="mockup-icon">☁️</div>
-                            <div class="mockup-lines">
-                                <span style="width:110px;"></span>
-                                <span style="width:65px;"></span>
-                                <span style="width:90px;"></span>
-                            </div>
-                        </div>
+                        <img src="images/projects/cloudsync.png" alt="CloudSync project screenshot" class="project-mockup-img" onerror="this.style.display='none'" loading="lazy">
+                        <div class="mockup-content"><div class="mockup-icon">☁️</div><div class="mockup-lines"><span style="width:110px;"></span><span style="width:65px;"></span><span style="width:90px;"></span></div></div>
                     </div>
                     <div class="project-title">CloudSync</div>
                     <div class="project-desc">A lightweight file synchronization tool that mirrors local directories to AWS S3 with intelligent conflict resolution and scheduling.</div>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">AWS S3</span>
-                        <span class="project-tag">Docker</span>
-                        <span class="project-tag">Cron</span>
-                    </div>
-                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        View on GitHub
-                    </a>
+                    <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">AWS S3</span><span class="project-tag">Docker</span><span class="project-tag">Cron</span></div>
+                    <a href="https://github.com" target="_blank" rel="noopener" class="project-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> View on GitHub</a>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
         <footer id="contact" class="site-footer reveal">
-            <p><a href="mailto:alex.chen@example.com" style="color:var(--accent-lavender);text-decoration:none;">charldominicursabia@gmail.com</a></p>
+            <p><a href="mailto:charldominicursabia@gmail.com" style="color:var(--accent-lavender);text-decoration:none;">charldominicursabia@gmail.com</a></p>
         </footer>
     </div>
 
-    <!-- Lightbox Overlay -->
     <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox(event)" aria-hidden="true">
         <div class="lightbox-content" id="lightbox-content" onclick="event.stopPropagation()">
             <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close lightbox">✕</button>
             <div id="lightbox-cert-preview"></div>
-            <div id="lightbox-cert-details"></div>
+            <div id="lightbox-cert-details" class="lightbox-cert-details"></div>
         </div>
     </div>
 
     <script>
-        // ── Starfield Canvas ──
         (function() {
             const canvas = document.getElementById('starfield-canvas');
             const ctx = canvas.getContext('2d');
@@ -1220,40 +1242,11 @@
             animate();
         })();
 
-        // ── Lightbox Logic ──
         const certData = {
-            aws: {
-                title: 'AWS Certified Cloud Practitioner',
-                org: 'Amazon Web Services',
-                date: 'Issued: March 2025',
-                seal: '☁️',
-                code: 'CLF-C02',
-                name: 'Charl Dominic Ursabia',
-            },
-            comptia: {
-                title: 'CompTIA Security+',
-                org: 'CompTIA',
-                date: 'Issued: January 2025',
-                seal: '🛡️',
-                code: 'SY0-701',
-                name: 'Charl Dominic Ursabia',
-            },
-            google: {
-                title: 'Google IT Support Professional',
-                org: 'Google / Coursera',
-                date: 'Issued: November 2024',
-                seal: '🔧',
-                code: 'IT Support',
-                name: 'Charl Dominic Ursabia',
-            },
-            cisco: {
-                title: 'Cisco CCNA',
-                org: 'Cisco Systems',
-                date: 'Issued: June 2025',
-                seal: '🌐',
-                code: 'CCNA',
-                name: 'Charl Dominic Ursabia',
-            },
+            aws: { title: 'Network Security', org: 'Certiport', date: 'Issued: May 20, 2026', code: 'wYhnz-2F9S', name: 'Charl Dominic Ursabia', image: 'images/certificates/Cert-networksecurity.jpg' },
+            comptia: { title: 'Networking', org: 'Certiport', date: 'Issued: March 12, 2025', code: 'urLC-XM3b', name: 'Charl Dominic Ursabia', image: 'images/certificates/Cert-networking.jpg' },
+            google: { title: 'HTML & CSS', org: 'Certiport', date: 'Issued: May 20, 2024', code: 'XnhM-XM3V', name: 'Charl Dominic Ursabia', image: 'images/certificates/Cert-htmlcss.jpg' },
+            cisco: { title: 'Java', org: 'Certiport', date: 'Issued: March 15, 2023', code: 'rQVL-u57d', name: 'Charl Dominic Ursabia', image: 'images/certificates/Cert-java.jpg' },
         };
 
         function openLightbox(certKey) {
@@ -1264,20 +1257,12 @@
             const detailsContainer = document.getElementById('lightbox-cert-details');
 
             previewContainer.innerHTML = `
-                        <div class="lightbox-cert-preview">
-                            <div class="lightbox-cert-seal">${data.seal}</div>
-                            <div class="lightbox-cert-title">${data.title}</div>
-                            <div class="lightbox-cert-name">Awarded to: ${data.name}</div>
-                            <div class="lightbox-cert-org">${data.org}</div>
-                            <div class="lightbox-cert-date">${data.date} &nbsp;·&nbsp; ${data.code}</div>
-                        </div>
-                    `;
+                <div class="lightbox-cert-image-wrapper">
+                    <img src="${data.image}" alt="${data.title} Certificate" class="lightbox-cert-image" onerror="this.style.display='none'" loading="lazy">
+                    <div class="lightbox-cert-image-fallback"><span class="lightbox-fallback-icon">📜</span><span class="lightbox-fallback-text">Certificate Image</span><span class="lightbox-fallback-hint">Add your certificate image to display it here</span></div>
+                </div>`;
             detailsContainer.innerHTML = `
-                        <p style="color:#bfb5d6;font-size:0.9rem;margin-top:8px;">
-                            <strong style="color:#fff;">${data.title}</strong> — ${data.org}<br>
-                            <span style="font-size:0.78rem;color:#8a7fa8;">${data.date} · Credential ID: ${data.code}-2025-${data.name.replace(' ','-').toLowerCase()}</span>
-                        </p>
-                    `;
+                <div class="detail-title">${data.title}</div><div class="detail-org">${data.org}</div><div class="detail-date">${data.date} · ${data.code}</div><div class="detail-name">Awarded to: ${data.name}</div>`;
 
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');
@@ -1296,20 +1281,12 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const overlay = document.getElementById('lightbox-overlay');
-                if (overlay.classList.contains('active')) {
-                    closeLightbox();
-                }
+                if (overlay.classList.contains('active')) closeLightbox();
             }
         });
 
-        // ── Scroll Reveal ──
         const revealElements = document.querySelectorAll('.reveal');
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -60px 0px',
-            threshold: 0.12,
-        };
-
+        const observerOptions = { root: null, rootMargin: '0px 0px -60px 0px', threshold: 0.12 };
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1318,10 +1295,8 @@
                 }
             });
         }, observerOptions);
-
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // ── Smooth Nav Active State ──
         const navLinks = document.querySelectorAll('.nav-glass a:not(.nav-cta)');
         const sections = [];
         navLinks.forEach(link => {
@@ -1331,14 +1306,11 @@
                 if (section) sections.push({ link, section });
             }
         });
-
         function updateActiveNav() {
             let currentId = '';
             sections.forEach(({ link, section }) => {
                 const rect = section.getBoundingClientRect();
-                if (rect.top <= 180) {
-                    currentId = link.getAttribute('href');
-                }
+                if (rect.top <= 180) currentId = link.getAttribute('href');
             });
             navLinks.forEach(link => {
                 if (link.getAttribute('href') === currentId) {
@@ -1352,12 +1324,6 @@
         }
         window.addEventListener('scroll', updateActiveNav, { passive: true });
         updateActiveNav();
-
-        // console.log('%c🚀 Charl Dominic Ursabia Portfolio — Deep Space Tech %cReady',
-        //     'color:#c988ff;font-size:1.2em;font-weight:bold;',
-        //     'color:#bfb5d6;');
-        // console.log('%c✨ All systems nominal. Explore the cosmos!',
-        //     'color:#5eeadb;font-style:italic;');
     </script>
 </body>
 </html>
