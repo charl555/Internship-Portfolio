@@ -699,6 +699,10 @@
       <span class="section-label">Credentials</span>
       <h2 class="section-title">Certifications</h2>
       <div class="certs-grid">
+                <div class="cert-card" data-cert="cce" onclick="openLightbox('cce')">
+          <div class="cert-thumb"><img src="images/certificates/Cert-git&githubandreactjs.jpg" alt="Git & Github and React.js Training" class="cert-thumb-img" onerror="this.style.display='none'"><div class="cert-thumb-fallback">📜</div></div>
+          <div class="cert-title">Git & Github and React.js Training</div><div class="cert-org">CCE Skills Clinic</div><div class="view-hint">Click to view →</div>
+        </div>
         <div class="cert-card" data-cert="aws" onclick="openLightbox('aws')">
           <div class="cert-thumb"><img src="images/certificates/Cert-networksecurity.jpg" alt="Network Security" class="cert-thumb-img" onerror="this.style.display='none'"><div class="cert-thumb-fallback">📜</div></div>
           <div class="cert-title">Network Security</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
@@ -726,14 +730,14 @@
         <div class="project-card">
           <div class="project-mockup"><img src="images/projects/dressupdavao.png" alt="DressUp Davao" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
           <div class="project-title">DressUp Davao</div>
-          <div class="project-desc">Multi‑vendor gown & suit rental platform with 3D model visualization.</div>
+          <div class="project-desc">A full-stack event attire rental platform using Laravel, MySQL, and the TALL stack, integrating the KiriEngine API to render dynamic 3D previews of gowns and suits for an interactive customer browsing experience.</div>
           <div class="project-tags"><span class="project-tag">Laravel</span><span class="project-tag">Filament</span><span class="project-tag">MySQL</span></div>
           <a href="https://github.com/charl555/DressUpDavaoWebApp.git" target="_blank" class="project-link">🔗 View on GitHub</a>
         </div>
                 <div class="project-card">
-          <div class="project-mockup"><img src="" alt="DressUp Davao" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
-          <div class="project-title">TechParts</div>
-          <div class="project-desc">Tech Ecommerce Website</div>
+          <div class="project-mockup"><img src="images/projects/pcforge.png" alt="PCForge" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
+          <div class="project-title">PCForge</div>
+          <div class="project-desc">A full-featured tech e-commerce web application utilizing Laravel, React, Inertia.js, and shadcn/ui, incorporating a customer storefront for cart management and an administrative dashboard for order fulfillment, inventory control, coupon rules, and sales analytics.</div>
           <div class="project-tags"><span class="project-tag">Laravel</span><span class="project-tag">React JS</span><span class="project-tag">Intertia.JS</span><span class="project-tag">MySQL</span></div>
           <a href="https://github.com/charl555/tech-web-app.git" target="_blank" class="project-link">🔗 View on GitHub</a>
         </div>
@@ -796,6 +800,7 @@
     })();
 
     const certData = {
+      cce: { title:'Git & Github and React.js Training', org:'CCE Skills Clinic', image:'images/certificates/Cert-git&githubandreactjs.jpg' },
       aws: { title:'Network Security', org:'Certiport', image:'images/certificates/Cert-networksecurity.jpg' },
       comptia: { title:'Networking', org:'Certiport', image:'images/certificates/Cert-networking.jpg' },
       google: { title:'HTML & CSS', org:'Certiport', image:'images/certificates/Cert-htmlcss.jpg' },
