@@ -6,27 +6,27 @@
   <title>Charl Dominic Ursabia · IT Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-deep: #0F0C20;
-      --bg-obsidian: #0a0818;
-      --surface-glass: rgba(20, 16, 45, 0.55);
-      --surface-glass-hover: rgba(28, 22, 58, 0.65);
-      --border-glass: rgba(180, 160, 220, 0.18);
-      --border-glass-bright: rgba(200, 180, 240, 0.3);
-      --accent-violet: #b44dff;
-      --accent-lavender: #c988ff;
-      --accent-cyan: #5eeadb;
-      --accent-cyan-dim: rgba(94, 234, 219, 0.5);
-      --text-primary: #f0ebfa;
-      --text-secondary: #bfb5d6;
-      --text-muted: #8a7fa8;
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 20px;
-      --radius-xl: 24px;
-      --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(180, 160, 220, 0.08) inset;
+      --bg-deep: #080C0A;
+      --bg-surface: #0E1512;
+      --surface-glass: rgba(16, 26, 22, 0.55);
+      --surface-glass-hover: rgba(22, 36, 30, 0.7);
+      --border-glass: rgba(52, 211, 153, 0.12);
+      --border-glass-bright: rgba(52, 211, 153, 0.35);
+      --accent-emerald: #34d399;
+      --accent-mint: #6ee7b7;
+      --accent-sage: #a7f3d0;
+      --accent-glow: rgba(52, 211, 153, 0.15);
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(52, 211, 153, 0.08) inset;
       --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
@@ -42,7 +42,7 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg-deep);
       color: var(--text-primary);
       line-height: 1.6;
@@ -52,7 +52,8 @@
       min-height: 100vh;
     }
 
-    #starfield-canvas {
+    /* ── Aurora Glow Background Blobs ── */
+    .aurora-container {
       position: fixed;
       top: 0;
       left: 0;
@@ -60,7 +61,58 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.85;
+      overflow: hidden;
+    }
+
+    .aurora-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.28;
+      animation: floatAurora 18s ease-in-out infinite alternate;
+    }
+
+    .aurora-1 {
+      top: -10%;
+      left: 20%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #059669 0%, transparent 70%);
+    }
+
+    .aurora-2 {
+      bottom: 10%;
+      right: -5%;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, #10b981 0%, transparent 70%);
+      animation-delay: -6s;
+    }
+
+    .aurora-3 {
+      top: 45%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #047857 0%, transparent 70%);
+      animation-delay: -12s;
+    }
+
+    @keyframes floatAurora {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, 30px) scale(1.1); }
+      100% { transform: translate(-30px, 50px) scale(0.95); }
+    }
+
+    #ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
     }
 
     .grid-overlay {
@@ -71,34 +123,16 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.03;
+      opacity: 0.025;
       background-image:
-        linear-gradient(rgba(180, 160, 220, 0.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(180, 160, 220, 0.4) 1px, transparent 1px);
+        linear-gradient(rgba(52, 211, 153, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.4) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 30%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 30%, transparent 70%);
     }
 
-    .constellation-decor {
-      position: fixed;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.06;
-      top: 10%;
-      right: 5%;
-      width: 400px;
-      height: 500px;
-    }
-    .constellation-decor.left {
-      left: 3%;
-      right: auto;
-      top: 55%;
-      width: 350px;
-      height: 400px;
-      opacity: 0.05;
-    }
-
+    /* ── Navigation Glass Bar ── */
     .nav-glass {
       position: fixed;
       top: 20px;
@@ -110,44 +144,42 @@
       -webkit-backdrop-filter: blur(28px) saturate(160%);
       border: 1px solid var(--border-glass);
       border-radius: 50px;
-      padding: 10px 24px;
+      padding: 8px 18px;
       display: flex;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(200, 180, 240, 0.06) inset;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       transition: all var(--transition-smooth);
     }
     .nav-glass:hover {
       border-color: var(--border-glass-bright);
-      box-shadow: 0 8px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(200, 180, 240, 0.12) inset, 0 0 30px rgba(180, 77, 255, 0.08);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--accent-glow);
     }
     .nav-glass a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      padding: 9px 18px;
+      padding: 8px 16px;
       border-radius: 40px;
       transition: all var(--transition-smooth);
-      letter-spacing: 0.01em;
       white-space: nowrap;
-      position: relative;
     }
     .nav-glass a:hover,
     .nav-glass a:focus-visible {
       color: #fff;
-      background: rgba(180, 140, 220, 0.15);
+      background: rgba(52, 211, 153, 0.1);
       outline: none;
     }
     .nav-glass a.nav-cta {
-      background: rgba(180, 77, 255, 0.25);
-      color: #fff;
+      background: rgba(52, 211, 153, 0.18);
+      color: var(--accent-mint);
       font-weight: 600;
-      border: 1px solid rgba(200, 160, 240, 0.3);
+      border: 1px solid rgba(52, 211, 153, 0.3);
     }
     .nav-glass a.nav-cta:hover {
-      background: rgba(180, 77, 255, 0.4);
-      box-shadow: 0 0 25px rgba(180, 77, 255, 0.3);
+      background: rgba(52, 211, 153, 0.3);
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
     }
 
     .main-wrapper {
@@ -155,145 +187,108 @@
       z-index: 2;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 20px 28px 60px;
+      padding: 100px 24px 60px;
     }
 
     section {
       margin-bottom: 90px;
-      scroll-margin-top: 120px;
+      scroll-margin-top: 100px;
     }
 
     .section-label {
       display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent-lavender);
-      margin-bottom: 10px;
-      opacity: 0.8;
+      color: var(--accent-emerald);
+      margin-bottom: 8px;
     }
     .section-title {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
       color: #fff;
-      line-height: 1.2;
     }
 
-    /* ── Centered Hero (reduced bottom spacing) ── */
+    /* ── Hero Bento Box ── */
     .hero-section {
+      margin-bottom: 70px;
+    }
+    .hero-bento {
+      background: var(--surface-glass);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-xl);
+      padding: 50px 36px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      min-height: 70vh;
-      padding: 30px 0 10px; 
-      margin-bottom: 50px; 
+      box-shadow: var(--shadow-card);
       position: relative;
+      overflow: hidden;
     }
-    .hero-content {
-      max-width: 700px;
-      width: 100%;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 28px;
-      position: relative;
-    }
-    .hero-avatar-placeholder {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, rgba(180, 77, 255, 0.15) 0%, rgba(94, 234, 219, 0.08) 100%);
-      border: 2px solid rgba(200, 180, 240, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(220, 200, 250, 0.08) inset;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-avatar-placeholder span {
-      font-size: 4rem;
-      opacity: 0.7;
-      filter: drop-shadow(0 0 12px rgba(180, 140, 220, 0.4));
-    }
-    .hero-visual::before {
+    .hero-bento::before {
       content: '';
       position: absolute;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(160, 60, 240, 0.18) 0%, transparent 70%);
-      z-index: 0;
-      animation: heroPulse 4s ease-in-out infinite;
-    }
-    @keyframes heroPulse {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.12); opacity: 0.9; }
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-glass-bright), transparent);
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(180, 140, 220, 0.12);
-      border: 1px solid rgba(200, 170, 230, 0.25);
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.22);
       border-radius: 50px;
-      padding: 6px 15px;
+      padding: 6px 16px;
       font-size: 0.8rem;
       font-weight: 500;
-      color: var(--accent-lavender);
-      margin-bottom: 18px;
-      letter-spacing: 0.02em;
+      color: var(--accent-mint);
+      margin-bottom: 24px;
     }
     .hero-badge .dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent-cyan);
+      background: var(--accent-emerald);
       animation: dotBlink 2s ease-in-out infinite;
     }
     @keyframes dotBlink {
-      0%, 100% { opacity: 0.4; box-shadow: 0 0 6px var(--accent-cyan-dim); }
-      50% { opacity: 1; box-shadow: 0 0 16px var(--accent-cyan); }
+      0%, 100% { opacity: 0.4; box-shadow: 0 0 6px var(--accent-emerald); }
+      50% { opacity: 1; box-shadow: 0 0 16px var(--accent-emerald); }
     }
     .hero-headline {
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.12;
-      margin-bottom: 14px;
+      line-height: 1.15;
+      margin-bottom: 18px;
       color: #fff;
     }
     .hero-headline .highlight {
-      background: linear-gradient(135deg, rgba(160, 60, 240, 0.7) 0%, rgba(120, 40, 200, 0.7) 100%);
+      background: linear-gradient(135deg, var(--accent-mint) 0%, var(--accent-emerald) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
     .hero-bio {
-      font-size: 0.98rem;
+      font-size: 1rem;
       color: var(--text-secondary);
-      max-width: 580px;
+      max-width: 620px;
       line-height: 1.6;
-      margin-bottom: 26px;
+      margin-bottom: 30px;
     }
     .hero-cta-group {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -301,33 +296,31 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, rgba(160, 60, 240, 0.7) 0%, rgba(120, 40, 200, 0.7) 100%);
-      border: 1px solid rgba(200, 160, 240, 0.35);
+      padding: 12px 26px;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.25) 0%, rgba(16, 185, 129, 0.2) 100%);
+      border: 1px solid rgba(52, 211, 153, 0.4);
       border-radius: 50px;
       color: #fff;
       font-weight: 600;
       font-size: 0.9rem;
       text-decoration: none;
-      letter-spacing: 0.01em;
       cursor: pointer;
       transition: all var(--transition-smooth);
-      box-shadow: 0 4px 20px rgba(140, 50, 220, 0.3);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(52, 211, 153, 0.15);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 35px rgba(160, 60, 240, 0.45);
-      border-color: rgba(220, 190, 255, 0.5);
+      box-shadow: 0 8px 30px rgba(52, 211, 153, 0.3);
+      border-color: var(--accent-mint);
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.35) 0%, rgba(16, 185, 129, 0.3) 100%);
     }
     .btn-secondary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 24px;
-      background: transparent;
-      border: 1px solid rgba(200, 170, 230, 0.3);
+      padding: 12px 26px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 50px;
       color: var(--text-primary);
       font-weight: 500;
@@ -335,95 +328,109 @@
       text-decoration: none;
       cursor: pointer;
       transition: all var(--transition-smooth);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
     }
     .btn-secondary:hover {
-      background: rgba(180, 140, 220, 0.1);
-      border-color: rgba(220, 190, 255, 0.5);
+      background: rgba(52, 211, 153, 0.08);
+      border-color: rgba(52, 211, 153, 0.3);
       transform: translateY(-2px);
+      color: #fff;
     }
 
-    /* skills spacing */
-    .skills-category {
-      margin-bottom: 28px;
+    /* ── Bento Grid Layout: Skills ── */
+    .bento-grid-skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .bento-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-card);
+      transition: all var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+    }
+    .bento-card:hover {
+      border-color: var(--border-glass-bright);
+      background: var(--surface-glass-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 30px var(--accent-glow);
     }
     .skills-category-title {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent-cyan);
-      margin-bottom: 12px;
-      opacity: 0.9;
+      color: var(--accent-mint);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .skills-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
     .skill-pill {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 9px 17px;
-      background: var(--surface-glass);
-      backdrop-filter: blur(14px) saturate(140%);
-      -webkit-backdrop-filter: blur(14px) saturate(140%);
-      border: 1px solid var(--border-glass);
+      padding: 8px 15px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 50px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 500;
       color: var(--text-primary);
       transition: all var(--transition-smooth);
       cursor: default;
-      letter-spacing: 0.01em;
     }
     .skill-pill:hover {
       border-color: var(--border-glass-bright);
-      background: var(--surface-glass-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(140, 60, 220, 0.2);
-      color: #fff;
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--accent-sage);
+      transform: translateY(-1px);
     }
 
+    /* ── Bento Grid Layout: Certifications ── */
     .certs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
       gap: 20px;
     }
     .cert-card {
       background: var(--surface-glass);
-      backdrop-filter: blur(18px) saturate(150%);
-      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
       border: 1px solid var(--border-glass);
       border-radius: var(--radius-lg);
-      padding: 20px 18px 18px;
+      padding: 20px;
       cursor: pointer;
       transition: all var(--transition-smooth);
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 12px;
-      position: relative;
-      overflow: hidden;
       text-align: center;
-      min-height: 200px;
     }
     .cert-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
       border-color: var(--border-glass-bright);
-      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(200, 170, 240, 0.1) inset, 0 0 40px rgba(160, 60, 240, 0.12);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--accent-glow);
     }
     .cert-thumb {
       width: 100%;
       height: 110px;
       border-radius: var(--radius-sm);
-      background: linear-gradient(145deg, #1c1a3a 0%, #252045 50%, #1a1535 100%);
+      background: rgba(0, 0, 0, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(200, 170, 230, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
       overflow: hidden;
     }
@@ -432,36 +439,36 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       border-radius: var(--radius-sm);
       z-index: 2;
-      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition: transform 0.4s ease;
     }
     .cert-card:hover .cert-thumb-img {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
     .cert-thumb-fallback {
       position: absolute;
       inset: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      font-size: 1.8rem;
       z-index: 1;
+      opacity: 0.6;
     }
-    .cert-card .cert-title {
+    .cert-title {
       font-weight: 700;
       font-size: 0.95rem;
       color: #fff;
     }
-    .cert-card .cert-org {
+    .cert-org {
       font-size: 0.78rem;
       color: var(--text-muted);
     }
     .view-hint {
-      font-size: 0.7rem;
-      color: var(--accent-cyan-dim);
+      font-size: 0.72rem;
+      color: var(--accent-emerald);
       opacity: 0;
       transition: opacity var(--transition-smooth);
     }
@@ -469,42 +476,40 @@
       opacity: 1;
     }
 
-    /* ── Uniform Project Grid ── */
+    /* ── Bento Grid Layout: Projects ── */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 24px;
-      margin-top: 8px;
     }
     .project-card {
       background: var(--surface-glass);
-      backdrop-filter: blur(18px) saturate(150%);
-      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
       border: 1px solid var(--border-glass);
       border-radius: var(--radius-lg);
-      padding: 20px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       gap: 14px;
       transition: all var(--transition-smooth);
       box-shadow: var(--shadow-card);
       height: 100%;
-      min-height: 360px;
     }
     .project-card:hover {
       transform: translateY(-5px);
       border-color: var(--border-glass-bright);
-      box-shadow: 0 14px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(200, 170, 240, 0.1) inset;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.55), 0 0 30px var(--accent-glow);
     }
     .project-mockup {
       width: 100%;
       aspect-ratio: 16 / 9;
       border-radius: var(--radius-sm);
-      background: linear-gradient(145deg, #1e1a3c 0%, #2a2348 40%, #1c1735 100%);
+      background: rgba(0, 0, 0, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(200, 170, 230, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
       overflow: hidden;
     }
@@ -519,15 +524,7 @@
       transition: transform 0.4s ease;
     }
     .project-card:hover .project-mockup-img {
-      transform: scale(1.05);
-    }
-    .mockup-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.7;
-      z-index: 1;
+      transform: scale(1.04);
     }
     .project-title {
       font-weight: 700;
@@ -535,9 +532,9 @@
       color: #fff;
     }
     .project-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
       flex: 1;
     }
     .project-tags {
@@ -547,13 +544,13 @@
       margin-top: 4px;
     }
     .project-tag {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 20px;
-      background: rgba(180, 140, 220, 0.1);
-      color: var(--accent-lavender);
-      border: 1px solid rgba(180, 140, 220, 0.2);
+      background: rgba(52, 211, 153, 0.08);
+      color: var(--accent-mint);
+      border: 1px solid rgba(52, 211, 153, 0.18);
     }
     .project-link {
       display: inline-flex;
@@ -563,25 +560,27 @@
       font-weight: 600;
       color: #fff;
       text-decoration: none;
-      padding: 9px 16px;
+      padding: 9px 18px;
       border-radius: 30px;
-      background: rgba(180, 140, 220, 0.12);
-      border: 1px solid rgba(200, 170, 230, 0.25);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       transition: all var(--transition-smooth);
       align-self: flex-start;
       margin-top: 8px;
     }
     .project-link:hover {
-      background: rgba(180, 140, 220, 0.22);
-      border-color: rgba(220, 190, 250, 0.5);
+      background: rgba(52, 211, 153, 0.2);
+      border-color: rgba(52, 211, 153, 0.4);
+      color: #fff;
     }
 
+    /* ── Lightbox Overlay ── */
     .lightbox-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(6,4,16,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(4, 8, 6, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -599,38 +598,46 @@
       backdrop-filter: blur(30px);
       border: 1px solid var(--border-glass-bright);
       border-radius: var(--radius-xl);
-      padding: 28px 22px;
+      padding: 28px;
       max-width: 600px;
       width: 90%;
       position: relative;
       transform: translateY(20px);
       transition: transform 0.4s ease;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
     }
     .active .lightbox-content {
       transform: translateY(0);
     }
     .lightbox-close {
       position: absolute;
-      top: 12px; right: 18px;
-      background: rgba(255,255,255,0.1);
+      top: 14px; right: 18px;
+      background: rgba(255, 255, 255, 0.08);
       border: none;
       color: #fff;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       cursor: pointer;
       border-radius: 50%;
       width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .site-footer {
       text-align: center;
-      padding: 30px 0 20px;
+      padding: 40px 0 20px;
       color: var(--text-muted);
-      border-top: 1px solid rgba(180,160,220,0.08);
+      border-top: 1px solid rgba(52, 211, 153, 0.08);
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(25px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal.visible {
@@ -639,6 +646,12 @@
     }
 
     @media (max-width: 700px) {
+      .main-wrapper {
+        padding-top: 90px;
+      }
+      .hero-bento {
+        padding: 36px 20px;
+      }
       .projects-grid {
         grid-template-columns: 1fr;
       }
@@ -646,9 +659,18 @@
   </style>
 </head>
 <body>
-  <canvas id="starfield-canvas"></canvas>
+
+  <!-- Aurora UI Background Blobs -->
+  <div class="aurora-container">
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+  </div>
+
+  <canvas id="ambient-canvas"></canvas>
   <div class="grid-overlay"></div>
 
+  <!-- Glass Navbar -->
   <nav class="nav-glass">
     <a href="#hero">Home</a>
     <a href="#skills">Skills</a>
@@ -658,147 +680,247 @@
   </nav>
 
   <div class="main-wrapper">
-   
+    
+    <!-- Hero Section (Bento Header) -->
     <section id="hero" class="hero-section reveal">
-      <div class="hero-content">
+      <div class="hero-bento">
         <h1 class="hero-headline">Hi, I'm <span class="highlight">Charl Dominic Ursabia</span></h1>
         <p class="hero-bio">Fourth-year BS Information Technology student with hands-on experience in full-stack web development using Laravel, React.js, Inertia.js, and MySQL, alongside projects in ASP.NET and Flutter. Passionate about expanding my technical scope into cybersecurity, networking, and system administration to deliver well-rounded IT solutions.</p>
         <div class="hero-cta-group">
           <a href="#projects" class="btn-primary">View My Work</a>
-          <a href="https://github.com/charl555" target="_blank" class="btn-secondary">GitHub</a>
+          <a href="https://github.com/charl555" target="_blank" class="btn-secondary">GitHub Profile</a>
         </div>
       </div>
     </section>
 
+    <!-- Skills Section (Bento Grid) -->
     <section id="skills" class="reveal">
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-category">
-        <h3 class="skills-category-title">Languages</h3>
-        <div class="skills-pills">
-          <span class="skill-pill">PHP</span><span class="skill-pill">C#</span><span class="skill-pill">Java</span>
-          <span class="skill-pill">Python</span><span class="skill-pill">JavaScript</span><span class="skill-pill">TypeScript</span><span class="skill-pill">HTML5</span><span class="skill-pill">CSS3</span>
+      <span class="section-label">Technical Stack</span>
+      <h2 class="section-title">Skills & Technologies</h2>
+      <div class="bento-grid-skills">
+        
+        <div class="bento-card">
+          <h3 class="skills-category-title">Languages</h3>
+          <div class="skills-pills">
+            <span class="skill-pill">PHP</span><span class="skill-pill">C#</span><span class="skill-pill">Java</span>
+            <span class="skill-pill">Python</span><span class="skill-pill">JavaScript</span><span class="skill-pill">TypeScript</span>
+            <span class="skill-pill">HTML5</span><span class="skill-pill">CSS3</span>
+          </div>
         </div>
-      </div>
-      <div class="skills-category">
-        <h3 class="skills-category-title">Frameworks & Libraries</h3>
-        <div class="skills-pills">
-          <span class="skill-pill">Laravel</span><span class="skill-pill">React.JS</span><span class="skill-pill">Inertia.JS</span><span class="skill-pill">Filament PHP</span><span class="skill-pill">ASP.NET</span>
-          <span class="skill-pill">Flutter</span><span class="skill-pill">Tailwind CSS</span>
+
+        <div class="bento-card">
+          <h3 class="skills-category-title">Frameworks & Libraries</h3>
+          <div class="skills-pills">
+            <span class="skill-pill">Laravel</span><span class="skill-pill">React.JS</span><span class="skill-pill">Inertia.JS</span>
+            <span class="skill-pill">Filament PHP</span><span class="skill-pill">ASP.NET</span><span class="skill-pill">Flutter</span>
+            <span class="skill-pill">Tailwind CSS</span>
+          </div>
         </div>
-      </div>
-      <div class="skills-category">
-        <h3 class="skills-category-title">Developer Tools</h3>
-        <div class="skills-pills">
-          <span class="skill-pill">VS Code</span><span class="skill-pill">Visual Studio 2022</span>
-          <span class="skill-pill">Cisco Packet Tracer</span><span class="skill-pill">Android Studio</span><span class="skill-pill">Figma</span>
+
+        <div class="bento-card">
+          <h3 class="skills-category-title">Developer Tools</h3>
+          <div class="skills-pills">
+            <span class="skill-pill">VS Code</span><span class="skill-pill">Visual Studio 2022</span>
+            <span class="skill-pill">Cisco Packet Tracer</span><span class="skill-pill">Android Studio</span>
+            <span class="skill-pill">Figma</span>
+          </div>
         </div>
+
       </div>
     </section>
 
+    <!-- Certifications Section (Bento Grid) -->
     <section id="certifications" class="reveal">
       <span class="section-label">Credentials</span>
       <h2 class="section-title">Certifications</h2>
       <div class="certs-grid">
-                <div class="cert-card" data-cert="cce" onclick="openLightbox('cce')">
-          <div class="cert-thumb"><img src="images/certificates/Cert-git&githubandreactjs.jpg" alt="Git & Github and React.js Training" class="cert-thumb-img" onerror="this.style.display='none'"><div class="cert-thumb-fallback">📜</div></div>
-          <div class="cert-title">Git & Github and React.js Training</div><div class="cert-org">CCE Skills Clinic</div><div class="view-hint">Click to view →</div>
-        </div>
+        
         <div class="cert-card" data-cert="aws" onclick="openLightbox('aws')">
-          <div class="cert-thumb"><img src="images/certificates/Cert-networksecurity.jpg" alt="Network Security" class="cert-thumb-img" onerror="this.style.display='none'"><div class="cert-thumb-fallback">📜</div></div>
-          <div class="cert-title">Network Security</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
+          <div class="cert-thumb">
+            <img src="images/certificates/Cert-networksecurity.jpg" alt="Network Security" class="cert-thumb-img" onerror="this.style.display='none'">
+            <div class="cert-thumb-fallback">📜</div>
+          </div>
+          <div class="cert-title">Network Security</div>
+          <div class="cert-org">Certiport</div>
+          <div class="view-hint">Click to view →</div>
         </div>
+
         <div class="cert-card" data-cert="comptia" onclick="openLightbox('comptia')">
-          <div class="cert-thumb"><img src="images/certificates/Cert-networking.jpg" alt="Networking" class="cert-thumb-img" onerror="this.style.display='none'"><div class="cert-thumb-fallback">🌐</div></div>
-          <div class="cert-title">Networking</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
+          <div class="cert-thumb">
+            <img src="images/certificates/Cert-networking.jpg" alt="Networking" class="cert-thumb-img" onerror="this.style.display='none'">
+            <div class="cert-thumb-fallback">🌐</div>
+          </div>
+          <div class="cert-title">Networking</div>
+          <div class="cert-org">Certiport</div>
+          <div class="view-hint">Click to view →</div>
         </div>
+
         <div class="cert-card" data-cert="google" onclick="openLightbox('google')">
-          <div class="cert-thumb"><img src="images/certificates/Cert-htmlcss.jpg" alt="HTML & CSS" class="cert-thumb-img" onerror="this.style.display='none'"><div class="cert-thumb-fallback">🎨</div></div>
-          <div class="cert-title">HTML & CSS</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
+          <div class="cert-thumb">
+            <img src="images/certificates/Cert-htmlcss.jpg" alt="HTML & CSS" class="cert-thumb-img" onerror="this.style.display='none'">
+            <div class="cert-thumb-fallback">🎨</div>
+          </div>
+          <div class="cert-title">HTML & CSS</div>
+          <div class="cert-org">Certiport</div>
+          <div class="view-hint">Click to view →</div>
         </div>
+
         <div class="cert-card" data-cert="cisco" onclick="openLightbox('cisco')">
-          <div class="cert-thumb"><img src="images/certificates/Cert-java.jpg" alt="Java" class="cert-thumb-img" onerror="this.style.display='none'"><div class="cert-thumb-fallback">☕</div></div>
-          <div class="cert-title">Java</div><div class="cert-org">Certiport</div><div class="view-hint">Click to view →</div>
+          <div class="cert-thumb">
+            <img src="images/certificates/Cert-java.jpg" alt="Java" class="cert-thumb-img" onerror="this.style.display='none'">
+            <div class="cert-thumb-fallback">☕</div>
+          </div>
+          <div class="cert-title">Java</div>
+          <div class="cert-org">Certiport</div>
+          <div class="view-hint">Click to view →</div>
         </div>
+                <div class="cert-card" data-cert="cce" onclick="openLightbox('cce')">
+          <div class="cert-thumb">
+            <img src="images/certificates/Cert-git&githubandreactjs.jpg" alt="Git, GitHub, and React.js" class="cert-thumb-img" onerror="this.style.display='none'">
+            <div class="cert-thumb-fallback">💻</div>
+          </div>
+          <div class="cert-title">Git, GitHub, and React.js</div>
+          <div class="cert-org">Certiport</div>
+          <div class="view-hint">Click to view →</div>
+        </div>
+
       </div>
     </section>
 
-
+    <!-- Projects Section (Bento Grid) -->
     <section id="projects" class="reveal">
       <span class="section-label">Portfolio</span>
-      <h2 class="section-title">Projects</h2>
+      <h2 class="section-title">Featured Projects</h2>
       <div class="projects-grid">
+        
         <div class="project-card">
-          <div class="project-mockup"><img src="images/projects/dressupdavao.png" alt="DressUp Davao" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
+          <div class="project-mockup">
+            <img src="images/projects/dressupdavao.png" alt="DressUp Davao" class="project-mockup-img" onerror="this.style.display='none'">
+          </div>
           <div class="project-title">DressUp Davao</div>
           <div class="project-desc">A full-stack event attire rental platform using Laravel, MySQL, and the TALL stack, integrating the KiriEngine API to render dynamic 3D previews of gowns and suits for an interactive customer browsing experience.</div>
-          <div class="project-tags"><span class="project-tag">Laravel</span><span class="project-tag">Filament</span><span class="project-tag">MySQL</span></div>
+          <div class="project-tags">
+            <span class="project-tag">Laravel</span><span class="project-tag">Filament</span><span class="project-tag">MySQL</span>
+          </div>
           <a href="https://github.com/charl555/DressUpDavaoWebApp.git" target="_blank" class="project-link">🔗 View on GitHub</a>
         </div>
-                <div class="project-card">
-          <div class="project-mockup"><img src="images/projects/pcforge.png" alt="PCForge" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
+
+        <div class="project-card">
+          <div class="project-mockup">
+            <img src="images/projects/pcforge.png" alt="PCForge" class="project-mockup-img" onerror="this.style.display='none'">
+          </div>
           <div class="project-title">PCForge</div>
-          <div class="project-desc">A full-featured tech e-commerce web application utilizing Laravel, React, Inertia.js, and shadcn/ui, incorporating a customer storefront for cart management and an administrative dashboard for order fulfillment, inventory control, coupon rules, and sales analytics.</div>
-          <div class="project-tags"><span class="project-tag">Laravel</span><span class="project-tag">React JS</span><span class="project-tag">Intertia.JS</span><span class="project-tag">MySQL</span></div>
+          <div class="project-desc">A full-featured tech e-commerce web application utilizing Laravel, React, Inertia.js, and shadcn/ui, incorporating a customer storefront for cart management and an administrative dashboard for order fulfillment, inventory control, coupon rules, and sales analytics..</div>
+          <div class="project-tags">
+            <span class="project-tag">Laravel</span><span class="project-tag">React JS</span><span class="project-tag">Inertia.JS</span><span class="project-tag">MySQL</span>
+          </div>
           <a href="https://github.com/charl555/tech-web-app.git" target="_blank" class="project-link">🔗 View on GitHub</a>
         </div>
+
         <div class="project-card">
-          <div class="project-mockup"><img src="images/projects/devtrack.png" alt="EduLink" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
+          <div class="project-mockup">
+            <img src="images/projects/devtrack.png" alt="EduLink CRMS" class="project-mockup-img" onerror="this.style.display='none'">
+          </div>
           <div class="project-title">EduLink CRMS</div>
-          <div class="project-desc">Classroom record management system built with ASP.NET and C#.</div>
-          <div class="project-tags"><span class="project-tag">C#</span><span class="project-tag">ASP.NET</span></div>
+          <div class="project-desc">Classroom record management system for tracking student metrics built with ASP.NET.</div>
+          <div class="project-tags">
+            <span class="project-tag">C#</span><span class="project-tag">ASP.NET</span>
+          </div>
           <a href="#" class="project-link">🔗 View on GitHub</a>
         </div>
+
         <div class="project-card">
-          <div class="project-mockup"><img src="images/projects/securevault.png" alt="Fatima Day Care" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
+          <div class="project-mockup">
+            <img src="images/projects/securevault.png" alt="Fatima Day Care" class="project-mockup-img" onerror="this.style.display='none'">
+          </div>
           <div class="project-title">Fatima Day Care Center</div>
-          <div class="project-desc">Web app for daycare management, enrollment & attendance tracking.</div>
-          <div class="project-tags"><span class="project-tag">Laravel</span><span class="project-tag">PHP</span><span class="project-tag">SQL</span></div>
+          <div class="project-desc">Web portal for daycare administrative operations, student enrollment, and attendance.</div>
+          <div class="project-tags">
+            <span class="project-tag">Laravel</span><span class="project-tag">PHP</span><span class="project-tag">SQL</span>
+          </div>
           <a href="#" class="project-link">🔗 View on GitHub</a>
         </div>
+
         <div class="project-card">
-          <div class="project-mockup"><img src="images/projects/cloudsync.png" alt="Attendance App" class="project-mockup-img" onerror="this.style.display='none'"><div class="mockup-content"></div></div>
+          <div class="project-mockup">
+            <img src="images/projects/cloudsync.png" alt="Employee Attendance App" class="project-mockup-img" onerror="this.style.display='none'">
+          </div>
           <div class="project-title">Employee Attendance App</div>
-          <div class="project-desc">Flutter mobile app with Firebase backend for attendance monitoring.</div>
-          <div class="project-tags"><span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Firebase</span></div>
+          <div class="project-desc">Cross-platform mobile application utilizing Firebase real-time attendance tracking.</div>
+          <div class="project-tags">
+            <span class="project-tag">Flutter</span><span class="project-tag">Dart</span><span class="project-tag">Firebase</span>
+          </div>
           <a href="#" class="project-link">🔗 View on GitHub</a>
         </div>
+
       </div>
     </section>
 
     <footer id="contact" class="site-footer reveal">
-      <p><a href="mailto:charldominicursabia@gmail.com" style="color:var(--accent-lavender);">charldominicursabia@gmail.com</a></p>
+      <p>Get in touch: <a href="mailto:charldominicursabia@gmail.com" style="color:var(--accent-mint); font-weight: 500;">charldominicursabia@gmail.com</a></p>
+      <p>Download my CV: <a href="files/Resume.pdf" download style="color:var(--accent-mint); font-weight: 500;">Download CV</a></p>
     </footer>
   </div>
 
+  <!-- Certificate Lightbox -->
   <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox(event)">
     <div class="lightbox-content" onclick="event.stopPropagation()">
       <button class="lightbox-close" onclick="closeLightbox()">✕</button>
       <div id="lightbox-cert-preview"></div>
-      <div id="lightbox-cert-details" class="lightbox-cert-details"></div>
+      <div id="lightbox-cert-details" style="margin-top: 16px;"></div>
     </div>
   </div>
 
   <script>
+    /* Ambient Emerald Particles */
     (function() {
-      const canvas = document.getElementById('starfield-canvas');
+      const canvas = document.getElementById('ambient-canvas');
       const ctx = canvas.getContext('2d');
       let particles = [];
-      function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-      resize(); window.addEventListener('resize',()=>{ resize(); init(); });
-      function init(){
+      
+      function resize() { 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight; 
+      }
+      resize(); 
+      window.addEventListener('resize', () => { resize(); init(); });
+
+      function init() {
         particles = [];
-        for(let i=0;i<90;i++) particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.8+0.4,sx:(Math.random()-0.5)*0.25,sy:(Math.random()-0.5)*0.25,o:Math.random()*0.6+0.2});
+        for(let i = 0; i < 60; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.5 + 0.5,
+            sx: (Math.random() - 0.5) * 0.2,
+            sy: (Math.random() - 0.5) * 0.2,
+            o: Math.random() * 0.5 + 0.2
+          });
+        }
       }
       init();
-      function animate(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        particles.forEach(p=>{p.x+=p.sx;p.y+=p.sy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
-          ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,175,230,${p.o})`;ctx.fill();});
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.sx;
+          p.y += p.sy;
+          if(p.x < 0) p.x = canvas.width;
+          if(p.x > canvas.width) p.x = 0;
+          if(p.y < 0) p.y = canvas.height;
+          if(p.y > canvas.height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(52, 211, 153, ${p.o})`;
+          ctx.fill();
+        });
         requestAnimationFrame(animate);
       }
       animate();
     })();
 
+    /* Certificate Lightbox Logic */
     const certData = {
       cce: { title:'Git & Github and React.js Training', org:'CCE Skills Clinic', image:'images/certificates/Cert-git&githubandreactjs.jpg' },
       aws: { title:'Network Security', org:'Certiport', image:'images/certificates/Cert-networksecurity.jpg' },
@@ -807,25 +929,34 @@
       cisco: { title:'Java', org:'Certiport', image:'images/certificates/Cert-java.jpg' }
     };
 
-    function openLightbox(key){
+    function openLightbox(key) {
       const d = certData[key];
       if(!d) return;
-      document.getElementById('lightbox-cert-preview').innerHTML = `<img src="${d.image}" style="width:100%; border-radius:12px;" onerror="this.style.display='none'">`;
-      document.getElementById('lightbox-cert-details').innerHTML = `<h3 style="color:#fff">${d.title}</h3><p style="color:var(--text-muted)">${d.org}</p>`;
+      document.getElementById('lightbox-cert-preview').innerHTML = `<img src="${d.image}" style="width:100%; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);" onerror="this.style.display='none'">`;
+      document.getElementById('lightbox-cert-details').innerHTML = `<h3 style="color:#fff; font-size: 1.2rem;">${d.title}</h3><p style="color:var(--text-muted); font-size: 0.9rem;">${d.org}</p>`;
       document.getElementById('lightbox-overlay').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
-    function closeLightbox(e){
+
+    function closeLightbox(e) {
       if(e && e.target !== document.getElementById('lightbox-overlay')) return;
       document.getElementById('lightbox-overlay').classList.remove('active');
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLightbox(); });
 
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, {threshold:0.1});
-    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+    /* Scroll Reveal Observer */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { 
+        if(e.isIntersecting) { 
+          e.target.classList.add('visible'); 
+          observer.unobserve(e.target); 
+        } 
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
